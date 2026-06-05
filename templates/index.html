@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceVision AI — Real-Time Face Recognition</title>
+    <meta name="description" content="Real-time face recognition system with AI-powered detection, identification, and age/gender estimation">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- ─── Header ─────────────────────────────────────────── -->
+    <header id="app-header">
+        <div class="header-content">
+            <h1 class="app-title">FaceVision <span class="gradient-text">AI</span></h1>
+            <p class="app-subtitle">Real-Time Face Recognition System</p>
+        </div>
+        <div class="live-indicator" id="live-indicator">
+            <span class="live-dot"></span>
+            <span>LIVE</span>
+        </div>
+    </header>
+
+    <!-- ─── Main Content ───────────────────────────────────── -->
+    <main id="main-content">
+        <!-- Video Feed Section -->
+        <section class="video-section" id="video-section">
+            <div class="video-container">
+                <img src="/video_feed" alt="Live Camera Feed" id="video-feed">
+                <div class="video-overlay">
+                    <span class="face-count-badge" id="face-count-badge">0 faces</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+
+            <!-- Detection Stats Panel -->
+            <div class="panel stats-panel" id="stats-panel">
+                <h2 class="panel-title">Detection</h2>
+                <div class="face-count" id="face-count">0</div>
+                <p class="face-count-label">Faces Detected</p>
+                <div class="detected-faces-list" id="detected-faces-list">
+                    <p class="empty-state" id="empty-state">No faces detected</p>
+                </div>
+            </div>
+
+            <!-- Register Face Panel -->
+            <div class="panel register-panel" id="register-panel">
+                <div class="panel-header" id="register-toggle">
+                    <h2 class="panel-title">Register Face</h2>
+                    <span class="toggle-icon" id="toggle-icon">+</span>
+                </div>
+                <div class="register-form-container" id="register-form-container">
+                    <form id="register-form" enctype="multipart/form-data">
+                        <div class="upload-zone" id="upload-zone">
+                            <div class="upload-icon">📷</div>
+                            <p>Drag &amp; drop a photo here</p>
+                            <p class="upload-hint">or click to browse</p>
+                            <input type="file" id="face-image-input" name="image" accept="image/*" hidden>
+                        </div>
+                        <div class="image-preview-container" id="image-preview-container" style="display:none">
+                            <img id="image-preview" alt="Preview">
+                            <button type="button" class="remove-preview" id="remove-preview">✕</button>
+                        </div>
+                        <input type="text" id="face-name-input" name="name" placeholder="Enter person's name" required autocomplete="off">
+                        <button type="submit" class="btn-primary" id="register-btn">Register (Upload)</button>
+                        <button type="button" class="btn-webcam" id="webcam-register-btn">Capture from Webcam</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Registered Faces Gallery -->
+            <div class="panel gallery-panel" id="gallery-panel">
+                <h2 class="panel-title">Registered Faces</h2>
+                <div class="faces-gallery" id="faces-gallery">
+                    <p class="empty-state">No faces registered yet</p>
+                </div>
+            </div>
+
+        </aside>
+    </main>
+
+    <!-- ─── Toast Container ────────────────────────────────── -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
